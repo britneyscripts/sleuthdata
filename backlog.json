@@ -1,0 +1,37 @@
+[
+  {
+    "title": "[v1.0.0] [Backend] Setup core FastAPI app and database models",
+    "body": "### User Story\nAs a developer, I want a structured FastAPI application and database session configuration so that I can manage search configurations and store jobs.\n\n### Acceptance Criteria\n- [ ] FastAPI app initialized in `api/main.py`\n- [ ] `SearchQuery` and `JobListing` tables declared in `core/models.py`\n- [ ] SQLite/PostgreSQL engine and session pool configured in `core/database.py`\n- [ ] `/docs` endpoint loads interactive Swagger documentation successfully",
+    "labels": ["v1.0.0", "Must-Have", "Backend"]
+  },
+  {
+    "title": "[v1.0.0] [Scrapers] Implement WeWorkRemotely and Gupy Spiders",
+    "body": "### User Story\nAs a job seeker, I want the system to crawl WeWorkRemotely RSS and Gupy search API so that I can collect tech jobs in Brazil/remote.\n\n### Acceptance Criteria\n- [ ] `BaseSpider` defined with `search()` abstract method\n- [ ] `WeWorkRemotelySpider` successfully parses jobs from the RSS feed\n- [ ] `GupySpider` successfully parses jobs from the portal API endpoint\n- [ ] Standardized dictionaries returned: `{title, company, location_raw, description, source_url}`",
+    "labels": ["v1.0.0", "Must-Have", "Scrapers"]
+  },
+  {
+    "title": "[v1.0.0] [Ingestion] Implement Hash Deduplication & Background Workers",
+    "body": "### User Story\nAs a user, I want the scraping jobs to run asynchronously and deduplicate entries so that I do not see the same job multiple times.\n\n### Acceptance Criteria\n- [ ] Deterministic SHA-256 hash generated from `normalized_title + company + remote_status`\n- [ ] Redis Queue (RQ) worker correctly schedules and executes crawler background tasks\n- [ ] Conflicting duplicate listings perform an upsert (update date/description) instead of duplicate insert",
+    "labels": ["v1.0.0", "Must-Have", "Ingestion"]
+  },
+  {
+    "title": "[v1.2.0] [Database] Create decoupled Company entity and add auto-migrations",
+    "body": "### User Story\nAs a Product Manager, I want company metrics separated from job listings so that ratings and organizational health indicators are cached per company.\n\n### Acceptance Criteria\n- [ ] `Company` model declared in `core/models.py`\n- [ ] Foreign key `company_id` linked from `JobListing` to `Company`\n- [ ] Startup migration logic implemented in `api/main.py` to auto-add `company_id` to SQLite table without losing data",
+    "labels": ["v1.2.0", "Should-Have", "Database"]
+  },
+  {
+    "title": "[v1.2.0] [AI & Insights] Implement Gemini structured insights enrichment",
+    "body": "### User Story\nAs a job seeker, I want the system to search DuckDuckGo and use Gemini to extract Glassdoor, Levels.fyi, and Layoffs info so that I can screen companies.\n\n### Acceptance Criteria\n- [ ] DuckDuckGo searches executed for ratings, compensation, and layoff queries\n- [ ] `CompanyInsightsSchema` defined in `core/enricher.py` using Pydantic\n- [ ] Gemini API (`gemini-2.5-flash`) extracts structured JSON matching the Pydantic schema using Structured Outputs (Zero Regex)\n- [ ] `Company` records updated with rating, average salary, and layoff alert",
+    "labels": ["v1.2.0", "Should-Have", "AI Ingestion"]
+  },
+  {
+    "title": "[v1.2.0] [Ingestion] Implement direct target company portals & merging",
+    "body": "### User Story\nAs a user, I want the crawler to prioritize direct company careers pages over aggregators when duplicate listings are found so that I can apply directly.\n\n### Acceptance Criteria\n- [ ] Ingest jobs from both aggregators and direct companies (configured in `target_companies.json`)\n- [ ] Merge pipeline implemented in `tasks.py`: if a duplicate is found and the incoming job is direct, overwrite source URL and description to direct source\n- [ ] Retain aggregator listing if the direct scraper fails (no data loss)",
+    "labels": ["v1.2.0", "Should-Have", "Ingestion"]
+  },
+  {
+    "title": "[v1.5.0] [AI] Extract skills from descriptions & calculate resume matching score",
+    "body": "### User Story\nAs a user, I want an LLM to extract required skills and calculate a match score against my resume profile so that I can prioritize applications.\n\n### Acceptance Criteria\n- [ ] Gemini API parses raw descriptions to extract list of technical and soft skills\n- [ ] Resume parsed and compared semantically against job skills requirements\n- [ ] Job listings populated with `skills_extracted` and `match_score` values",
+    "labels": ["v1.5.0", "Could-Have", "AI Ingestion"]
+  }
+]

@@ -18,9 +18,11 @@
 
 ---
 
+"All the dashes used in this article were the author's own." - Shakespeare
+
 **Sleuth Data** is an open-source, configuration-driven remote job aggregator designed to dynamically gather job opportunities based on personalized query settings, rather than scraping target websites in bulk. 
 
-Optimized for tech and product roles (PMs, Data PMs, Engineers), it enriches candidate workflows by fetching direct career links and consolidating organizational health parameters—such as Glassdoor sentiment ratings, market salary brackets, and layoff alerts—using **Gemini AI Structured Outputs**.
+Optimized for tech and product roles (PMs, Data PMs, Engineers), it enriches candidate workflows by fetching direct career links and consolidating organizational health parameters - such as Glassdoor sentiment ratings, market salary brackets, and layoff alerts - using **Gemini AI Structured Outputs**.
 
 ---
 
