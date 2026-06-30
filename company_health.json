@@ -1,0 +1,84 @@
+{
+  "enriched_companies": [
+    {
+      "name": "Late Checkout",
+      "careers_url": "https://www.latecheckout.agency/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Metalab",
+      "careers_url": "https://www.metalab.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "thoughtbot",
+      "careers_url": "https://thoughtbot.com/jobs",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Work & Co",
+      "careers_url": "https://work.co/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Linear",
+      "careers_url": "https://linear.app/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Supabase",
+      "careers_url": "https://supabase.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Vercel",
+      "careers_url": "https://vercel.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Doist",
+      "careers_url": "https://doist.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Hugging Face",
+      "careers_url": "https://huggingface.co/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Reforge",
+      "careers_url": "https://www.reforge.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "VibeLabs",
+      "careers_url": "https://www.vibelabs.ai/",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "AKQA",
+      "careers_url": "https://www.akqa.com/careers/",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Huge",
+      "careers_url": "https://www.hugeinc.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Media.Monks (Monks)",
+      "careers_url": "https://monks.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "Thoughtworks",
+      "careers_url": "https://www.thoughtworks.com/careers",
+      "glassdoor_rating": "Not found"
+    },
+    {
+      "name": "R/GA",
+      "careers_url": "https://www.rga.com/careers",
+      "glassdoor_rating": "Not found"
+    }
+  ]
+}

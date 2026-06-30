@@ -6,6 +6,7 @@ from core.deduper import calculate_canonical_hash, clean_string
 from core.normalizer import parse_remote_status, normalize_location
 from spiders.wworkremotely import WeWorkRemotelySpider
 from spiders.gupy import GupySpider
+from spiders.target_company import TargetCompanySpider
 
 def crawl_query_job(query_id: str):
     """
@@ -26,7 +27,8 @@ def crawl_query_job(query_id: str):
         # 2. Instantiate spiders
         spiders = [
             WeWorkRemotelySpider(),
-            GupySpider()
+            GupySpider(),
+            TargetCompanySpider()
         ]
 
         jobs_collected = []

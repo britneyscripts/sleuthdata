@@ -33,5 +33,10 @@
     "title": "[v1.5.0] [AI] Extract skills from descriptions & calculate resume matching score",
     "body": "### User Story\nAs a user, I want an LLM to extract required skills and calculate a match score against my resume profile so that I can prioritize applications.\n\n### Acceptance Criteria\n- [ ] Gemini API parses raw descriptions to extract list of technical and soft skills\n- [ ] Resume parsed and compared semantically against job skills requirements\n- [ ] Job listings populated with `skills_extracted` and `match_score` values",
     "labels": ["v1.5.0", "Could-Have", "AI Ingestion"]
+  },
+  {
+    "title": "[v1.2.0] [Scrapers] Implement TargetCompanySpider for Greenhouse & Lever ATS APIs",
+    "body": "### User Story\nAs a developer, I want a single unified spider to crawl target companies using Greenhouse and Lever public board APIs so that I don't have to build custom DOM scrapers for each site.\n\n### Acceptance Criteria\n- [ ] Identify and map companies in `target_companies.json` to Greenhouse/Lever board identifiers\n- [ ] Create `TargetCompanySpider` in `spiders/target_company.py` that queries Greenhouse API (`boards-api.greenhouse.io`) and Lever API (`api.lever.co`)\n- [ ] Normalize output format and integrate it inside `workers/tasks.py`\n- [ ] Filter jobs by user-defined keywords in-memory before yielding results",
+    "labels": ["v1.2.0", "Should-Have", "Scrapers"]
   }
 ]
