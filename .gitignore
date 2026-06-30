@@ -1,0 +1,15 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Local databases and SQLite files
+*.db
+local_jobs.db
+test_jobs.db
+
+# Sensitive local configurations
+.env
+
+# OS-specific files
+.DS_Store

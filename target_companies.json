@@ -1,0 +1,82 @@
+{
+  "job_boards_and_aggregators": [
+    {
+      "name": "Awwwards Agencies",
+      "url": "https://www.awwwards.com/agencies/"
+    },
+    {
+      "name": "Clutch (UX/UI & Product)",
+      "url": "https://clutch.co/agencies/ui-ux"
+    },
+    {
+      "name": "Built In",
+      "url": "https://builtin.com/"
+    }
+  ],
+  "target_companies": [
+    {
+      "name": "Late Checkout",
+      "url": "https://www.latecheckout.agency/careers"
+    },
+    {
+      "name": "Metalab",
+      "url": "https://www.metalab.com/careers"
+    },
+    {
+      "name": "thoughtbot",
+      "url": "https://thoughtbot.com/jobs"
+    },
+    {
+      "name": "Work & Co",
+      "url": "https://work.co/careers"
+    },
+    {
+      "name": "Linear",
+      "url": "https://linear.app/careers"
+    },
+    {
+      "name": "Supabase",
+      "url": "https://supabase.com/careers"
+    },
+    {
+      "name": "Vercel",
+      "url": "https://vercel.com/careers"
+    },
+    {
+      "name": "Doist",
+      "url": "https://doist.com/careers"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/careers"
+    },
+    {
+      "name": "Reforge",
+      "url": "https://www.reforge.com/careers"
+    },
+    {
+      "name": "VibeLabs",
+      "url": "https://www.vibelabs.ai/"
+    },
+    {
+      "name": "AKQA",
+      "url": "https://www.akqa.com/careers/"
+    },
+    {
+      "name": "Huge",
+      "url": "https://www.hugeinc.com/careers"
+    },
+    {
+      "name": "Media.Monks (Monks)",
+      "url": "https://monks.com/careers"
+    },
+    {
+      "name": "Thoughtworks",
+      "url": "https://www.thoughtworks.com/careers"
+    },
+    {
+      "name": "R/GA",
+      "url": "https://www.rga.com/careers"
+    }
+  ]
+}
