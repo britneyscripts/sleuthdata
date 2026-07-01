@@ -13,3 +13,7 @@ test_jobs.db
 
 # OS-specific files
 .DS_Store
+
+# Local test data
+data/
+scripts/seed_db.py

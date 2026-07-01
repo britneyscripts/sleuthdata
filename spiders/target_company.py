@@ -36,7 +36,16 @@ class TargetCompanySpider(BaseSpider):
             "huge": ("greenhouse", "huge"),
             "mediamonks": ("greenhouse", "mediamonks"),
             "thoughtworks": ("greenhouse", "thoughtworks"),  # Fallback token
-            "rga": ("greenhouse", "rga")
+            "rga": ("greenhouse", "rga"),
+            "cit": ("lever", "ciandt"),
+            "wellhub": ("greenhouse", "wellhub"),
+            "nubank": ("greenhouse", "nubank"),
+            "gitlab": ("greenhouse", "gitlab"),
+            "airbnb": ("greenhouse", "airbnb"),
+            "dropbox": ("greenhouse", "dropbox"),
+            "oyster": ("greenhouse", "oyster"),
+            "remote": ("greenhouse", "remote"),
+            "qonto": ("greenhouse", "qonto")
         }
 
     def _normalize_key(self, name: str) -> str:
@@ -126,7 +135,13 @@ class TargetCompanySpider(BaseSpider):
                             date_posted = datetime.utcnow().date()
                 elif ats_type == "lever":
                     title = raw_job.get("text", "")
-                    description_raw = raw_job.get("description", "") + " " + raw_job.get("lists", [{}])[0].get("content", "")
+                    lists = raw_job.get("lists", [])
+                    list_content = ""
+                    if isinstance(lists, list) and len(lists) > 0:
+                        first_list = lists[0]
+                        if isinstance(first_list, dict):
+                            list_content = first_list.get("content", "")
+                    description_raw = raw_job.get("description", "") + " " + list_content
                     location_raw = raw_job.get("categories", {}).get("location", "Remote")
                     source_url = raw_job.get("hostedUrl", "")
                     # Lever lists milliseconds timestamp
@@ -137,9 +152,10 @@ class TargetCompanySpider(BaseSpider):
                         except Exception:
                             date_posted = datetime.utcnow().date()
 
-                description = strip_html_tags(description_raw)
+                description = description_raw
+                clean_desc_for_filter = strip_html_tags(description_raw)
                 title_lower = title.lower()
-                desc_lower = description.lower()
+                desc_lower = clean_desc_for_filter.lower()
                 location_lower = location_raw.lower()
 
                 # 1. Keywords filtering

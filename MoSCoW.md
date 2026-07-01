@@ -43,7 +43,7 @@ The absolute critical path for a working local prototype.
 Focuses on targeted company pipelines and enriching company metadata with market health indicators.
 
 *   **Target Companies Ingestion:**
-    *   Scrape direct careers pages/APIs of companies listed in [target_companies.json](file:///Users/evabettinaacostadepaula/Sleuth%20Data/target_companies.json).
+    *   Scrape direct careers pages/APIs of companies listed in [target_companies.json](./target_companies.json).
 *   **Company Entity Separation:**
     *   Move company-specific fields (ratings, layoffs, salary metrics) into a dedicated `companies` table, separating them from the `job_listings` table.
 *   **Fallback & Merge Ingestion Pipeline:**

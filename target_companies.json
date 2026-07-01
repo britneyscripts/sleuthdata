@@ -77,6 +77,54 @@
     {
       "name": "R/GA",
       "url": "https://www.rga.com/careers"
+    },
+    {
+      "name": "CI&T",
+      "url": "https://ciandt.com/br/pt-br/carreiras/oportunidades"
+    },
+    {
+      "name": "Wellhub",
+      "url": "https://boards.greenhouse.io/wellhub"
+    },
+    {
+      "name": "Nubank",
+      "url": "https://boards.greenhouse.io/nubank"
+    },
+    {
+      "name": "GitLab",
+      "url": "https://boards.greenhouse.io/gitlab"
+    },
+    {
+      "name": "Airbnb",
+      "url": "https://boards.greenhouse.io/airbnb"
+    },
+    {
+      "name": "Dropbox",
+      "url": "https://boards.greenhouse.io/dropbox"
+    },
+    {
+      "name": "Oyster",
+      "url": "https://boards.greenhouse.io/oyster"
+    },
+    {
+      "name": "Remote",
+      "url": "https://boards.greenhouse.io/remote"
+    },
+    {
+      "name": "Qonto",
+      "url": "https://boards.greenhouse.io/qonto"
+    },
+    {
+      "name": "iFood",
+      "url": "https://carreiras.ifood.com.br/"
+    },
+    {
+      "name": "idwall",
+      "url": "https://www.idwall.co"
+    },
+    {
+      "name": "Dadosfera",
+      "url": "https://dadosfera.ai"
     }
   ]
 }

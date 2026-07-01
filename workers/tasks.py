@@ -50,6 +50,8 @@ def crawl_query_job(query_id: str):
         updated_jobs_count = 0
         aggregators = {"weworkremotely", "gupy", "builtin", "clutch", "awwwards"}
 
+        seen_hashes_in_batch = set()
+
         for job in jobs_collected:
             title = job["title"]
             company_name = job["company"]
@@ -59,6 +61,11 @@ def crawl_query_job(query_id: str):
             is_remote = parse_remote_status(location_raw)
             city, country = normalize_location(location_raw)
             canonical_hash = calculate_canonical_hash(title, company_name, is_remote)
+
+            # Deduplicate within the current ingestion batch to prevent unique constraint failures
+            if canonical_hash in seen_hashes_in_batch:
+                continue
+            seen_hashes_in_batch.add(canonical_hash)
 
             # Resolve Company (Find or Create)
             normalized_company = clean_string(company_name)

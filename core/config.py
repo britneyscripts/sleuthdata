@@ -3,10 +3,11 @@ from pydantic import Field
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Query-Driven Job Crawler"
+    ENV: str = Field(default="development", validation_alias="ENV")
     
     # Database
     DATABASE_URL: str = Field(
-        default="postgresql://postgres:postgres@localhost:5432/job_crawler",
+        default="sqlite:///dev_jobs.db",
         validation_alias="DATABASE_URL"
     )
     
@@ -24,5 +25,17 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore"
     )
+
+    @property
+    def database_url_resolved(self) -> str:
+        url = self.DATABASE_URL
+        if url.startswith("sqlite"):
+            # Switch file depending on ENV
+            if "local_jobs.db" in url or "dev_jobs.db" in url or "production_jobs.db" in url:
+                db_name = "dev_jobs.db" if self.ENV == "development" else "production_jobs.db"
+                if "///" in url:
+                    return url.split("///")[0] + "///" + db_name
+                return "sqlite:///" + db_name
+        return url
 
 settings = Settings()
