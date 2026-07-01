@@ -11,6 +11,7 @@ test_jobs.db
 # Sensitive local configurations
 .env
 target_companies.json
+AULA_ARQUITETURA.md
 
 # OS-specific files
 .DS_Store
