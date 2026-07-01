@@ -10,6 +10,7 @@ test_jobs.db
 
 # Sensitive local configurations
 .env
+target_companies.json
 
 # OS-specific files
 .DS_Store

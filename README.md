@@ -74,12 +74,17 @@ source .venv/bin/activate  # macOS / Linux
 pip install -r requirements.txt
 ```
 
-### 4. Setup Environment Variables:
+### 4. Setup Environment Variables & Configs:
 Copy `.env.example` to `.env` and configure your API keys:
 ```bash
 cp .env.example .env
 ```
 Ensure you set your `GEMINI_API_KEY` for company insights extraction.
+
+Copy `target_companies.example.json` to `target_companies.json` and edit with your own list of target companies:
+```bash
+cp target_companies.example.json target_companies.json
+```
 
 ### 5. Running the Application:
 Start the FastAPI server locally:

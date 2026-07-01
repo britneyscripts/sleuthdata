@@ -1,0 +1,13 @@
+{
+  "job_boards_and_aggregators": [
+    { "name": "Example Aggregator", "url": "https://example.com/jobs" }
+  ],
+  "target_companies": [
+    {
+      "name": "Example Co",
+      "url": "https://example.com/careers",
+      "ats_type": "greenhouse",
+      "token": "examplecomp"
+    }
+  ]
+}
