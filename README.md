@@ -48,7 +48,7 @@ Optimized for tech and product roles (PMs, Data PMs, Engineers), it enriches can
 
 *   **API Framework:** [FastAPI](https://fastapi.tiangolo.com) (Python)
 *   **Background Worker:** [Redis Queue (RQ)](https://python-rq.org)
-*   **Database:** PostgreSQL (with `JSONB` flexibility) / SQLite (for zero-dependency local testing)
+*   **Database:** PostgreSQL / SQLite (for zero-dependency local testing)
 *   **AI Engine:** [Google GenAI SDK](https://github.com/google/generative-ai-python) (Gemini 2.5 Flash)
 *   **Search / Scraping:** Native `requests` (for lightweight ATS crawling) + `ddgs` (DuckDuckGo search scraper interface for company enrichment)
 
