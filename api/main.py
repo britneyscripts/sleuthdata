@@ -7,6 +7,7 @@ from uuid import UUID
 from core.config import settings
 from core.database import engine, Base, get_db
 from core.models import SearchQuery, JobListing
+from core.security import require_api_key
 from workers.tasks import crawl_query_job
 
 # Import Pydantic models for validation
@@ -102,10 +103,10 @@ def read_root():
         "queue_backend": "Redis Queue (RQ)" if redis_active else "FastAPI BackgroundTasks (In-Memory)"
     }
 
-@app.post("/search-queries", response_model=SearchQueryResponse, status_code=210)
+@app.post("/search-queries", response_model=SearchQueryResponse, status_code=210, dependencies=[Depends(require_api_key)])
 def create_search_query(
-    query_data: SearchQueryCreate, 
-    background_tasks: BackgroundTasks, 
+    query_data: SearchQueryCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """
@@ -136,10 +137,10 @@ def list_search_queries(db: Session = Depends(get_db)):
     """
     return db.query(SearchQuery).all()
 
-@app.post("/search-queries/{query_id}/crawl")
+@app.post("/search-queries/{query_id}/crawl", dependencies=[Depends(require_api_key)])
 def trigger_crawler_manually(
-    query_id: UUID, 
-    background_tasks: BackgroundTasks, 
+    query_id: UUID,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """

@@ -6,14 +6,14 @@ services:
     container_name: job_crawler_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres_secure_pass
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?A senha do banco e obrigatoria!}
       POSTGRES_DB: job_crawler
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -38,10 +38,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres_secure_pass@postgres:5432/job_crawler
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:?A senha do banco e obrigatoria!}@postgres:5432/${POSTGRES_DB:-job_crawler}
       - REDIS_URL=redis://redis:6379/0
       - PYTHONPATH=/app
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - API_KEY=${API_KEY}
+      - ENV=${ENV:-production}
     depends_on:
       postgres:
         condition: service_healthy
@@ -51,14 +53,15 @@ services:
   worker:
     build: .
     container_name: job_crawler_worker
-    command: rq worker job_crawler --url redis://redis:6379/0
+    command: rq worker job_crawler company_enrichment --url redis://redis:6379/0
     volumes:
       - .:/app
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres_secure_pass@postgres:5432/job_crawler
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:?A senha do banco e obrigatoria!}@postgres:5432/${POSTGRES_DB:-job_crawler}
       - REDIS_URL=redis://redis:6379/0
       - PYTHONPATH=/app
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ENV=${ENV:-production}
     depends_on:
       postgres:
         condition: service_healthy

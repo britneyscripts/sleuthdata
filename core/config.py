@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     # Optional LLM Key for Skill Extraction
     GEMINI_API_KEY: str | None = Field(default=None, validation_alias="GEMINI_API_KEY")
 
+    # API authentication key required on write endpoints (x-api-key header).
+    # Falls back to a fixed dev key only when ENV=development (see core/security.py).
+    API_KEY: str | None = Field(default=None, validation_alias="API_KEY")
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

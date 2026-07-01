@@ -20,40 +20,6 @@ class TargetCompanySpider(BaseSpider):
         self.name = "target_companies"
         self.config_path = "target_companies.json"
 
-        # Known mapping of normalized company name to ATS details: (ats_type, board_token)
-        self.ats_map = {
-            "latecheckout": ("lever", "latecheckout"),
-            "metalab": ("greenhouse", "metalab"),
-            "thoughtbot": ("greenhouse", "thoughtbot"),
-            "workco": ("greenhouse", "workandco"),
-            "linear": ("greenhouse", "linear"),
-            "supabase": ("greenhouse", "supabase"),
-            "vercel": ("greenhouse", "vercel"),
-            "doist": ("greenhouse", "doist"),
-            "huggingface": ("greenhouse", "huggingface"),
-            "reforge": ("lever", "reforge"),
-            "akqa": ("greenhouse", "akqa"),
-            "huge": ("greenhouse", "huge"),
-            "mediamonks": ("greenhouse", "mediamonks"),
-            "thoughtworks": ("greenhouse", "thoughtworks"),  # Fallback token
-            "rga": ("greenhouse", "rga"),
-            "cit": ("lever", "ciandt"),
-            "wellhub": ("greenhouse", "wellhub"),
-            "nubank": ("greenhouse", "nubank"),
-            "gitlab": ("greenhouse", "gitlab"),
-            "airbnb": ("greenhouse", "airbnb"),
-            "dropbox": ("greenhouse", "dropbox"),
-            "oyster": ("greenhouse", "oyster"),
-            "remote": ("greenhouse", "remote"),
-            "qonto": ("greenhouse", "qonto")
-        }
-
-    def _normalize_key(self, name: str) -> str:
-        s = name.lower().strip()
-        s = re.sub(r'\b(inc|llc|corp|corporation|ltda|ltd|s\.a\.|sa|me|eireli)\b', '', s)
-        s = re.sub(r'[^a-z0-9]', '', s)
-        return s
-
     def _load_target_companies(self) -> list[dict]:
         if not os.path.exists(self.config_path):
             print(f"Warning: {self.config_path} not found.")
@@ -84,13 +50,17 @@ class TargetCompanySpider(BaseSpider):
 
         for target in targets:
             name = target.get("name", "")
-            norm_name = self._normalize_key(name)
-            
-            if norm_name not in self.ats_map:
-                print(f"Target company '{name}' has no defined ATS mappings. Skipping.")
+            ats_type = target.get("ats_type")
+            token = target.get("token")
+
+            if not ats_type or not token:
+                print(f"WARNING: Target company '{name}' is missing 'ats_type'/'token' in target_companies.json. Skipping.")
                 continue
 
-            ats_type, token = self.ats_map[norm_name]
+            if ats_type not in ["greenhouse", "lever"]:
+                print(f"WARNING: Target company '{name}' has unsupported ats_type '{ats_type}'. Must be 'greenhouse' or 'lever'. Skipping.")
+                continue
+
             print(f"Fetching listings for target company: {name} (ATS: {ats_type}, Token: {token})")
 
             raw_jobs = []

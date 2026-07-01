@@ -16,43 +16,63 @@
   "target_companies": [
     {
       "name": "Late Checkout",
-      "url": "https://www.latecheckout.agency/careers"
+      "url": "https://www.latecheckout.agency/careers",
+      "ats_type": "lever",
+      "token": "latecheckout"
     },
     {
       "name": "Metalab",
-      "url": "https://www.metalab.com/careers"
+      "url": "https://www.metalab.com/careers",
+      "ats_type": "greenhouse",
+      "token": "metalab"
     },
     {
       "name": "thoughtbot",
-      "url": "https://thoughtbot.com/jobs"
+      "url": "https://thoughtbot.com/jobs",
+      "ats_type": "greenhouse",
+      "token": "thoughtbot"
     },
     {
       "name": "Work & Co",
-      "url": "https://work.co/careers"
+      "url": "https://work.co/careers",
+      "ats_type": "greenhouse",
+      "token": "workandco"
     },
     {
       "name": "Linear",
-      "url": "https://linear.app/careers"
+      "url": "https://linear.app/careers",
+      "ats_type": "greenhouse",
+      "token": "linear"
     },
     {
       "name": "Supabase",
-      "url": "https://supabase.com/careers"
+      "url": "https://supabase.com/careers",
+      "ats_type": "greenhouse",
+      "token": "supabase"
     },
     {
       "name": "Vercel",
-      "url": "https://vercel.com/careers"
+      "url": "https://vercel.com/careers",
+      "ats_type": "greenhouse",
+      "token": "vercel"
     },
     {
       "name": "Doist",
-      "url": "https://doist.com/careers"
+      "url": "https://doist.com/careers",
+      "ats_type": "greenhouse",
+      "token": "doist"
     },
     {
       "name": "Hugging Face",
-      "url": "https://huggingface.co/careers"
+      "url": "https://huggingface.co/careers",
+      "ats_type": "greenhouse",
+      "token": "huggingface"
     },
     {
       "name": "Reforge",
-      "url": "https://www.reforge.com/careers"
+      "url": "https://www.reforge.com/careers",
+      "ats_type": "lever",
+      "token": "reforge"
     },
     {
       "name": "VibeLabs",
@@ -60,59 +80,87 @@
     },
     {
       "name": "AKQA",
-      "url": "https://www.akqa.com/careers/"
+      "url": "https://www.akqa.com/careers/",
+      "ats_type": "greenhouse",
+      "token": "akqa"
     },
     {
       "name": "Huge",
-      "url": "https://www.hugeinc.com/careers"
+      "url": "https://www.hugeinc.com/careers",
+      "ats_type": "greenhouse",
+      "token": "huge"
     },
     {
       "name": "Media.Monks (Monks)",
-      "url": "https://monks.com/careers"
+      "url": "https://monks.com/careers",
+      "ats_type": "greenhouse",
+      "token": "mediamonks"
     },
     {
       "name": "Thoughtworks",
-      "url": "https://www.thoughtworks.com/careers"
+      "url": "https://www.thoughtworks.com/careers",
+      "ats_type": "greenhouse",
+      "token": "thoughtworks"
     },
     {
       "name": "R/GA",
-      "url": "https://www.rga.com/careers"
+      "url": "https://www.rga.com/careers",
+      "ats_type": "greenhouse",
+      "token": "rga"
     },
     {
       "name": "CI&T",
-      "url": "https://ciandt.com/br/pt-br/carreiras/oportunidades"
+      "url": "https://ciandt.com/br/pt-br/carreiras/oportunidades",
+      "ats_type": "lever",
+      "token": "ciandt"
     },
     {
       "name": "Wellhub",
-      "url": "https://boards.greenhouse.io/wellhub"
+      "url": "https://boards.greenhouse.io/wellhub",
+      "ats_type": "greenhouse",
+      "token": "wellhub"
     },
     {
       "name": "Nubank",
-      "url": "https://boards.greenhouse.io/nubank"
+      "url": "https://boards.greenhouse.io/nubank",
+      "ats_type": "greenhouse",
+      "token": "nubank"
     },
     {
       "name": "GitLab",
-      "url": "https://boards.greenhouse.io/gitlab"
+      "url": "https://boards.greenhouse.io/gitlab",
+      "ats_type": "greenhouse",
+      "token": "gitlab"
     },
     {
       "name": "Airbnb",
-      "url": "https://boards.greenhouse.io/airbnb"
+      "url": "https://boards.greenhouse.io/airbnb",
+      "ats_type": "greenhouse",
+      "token": "airbnb"
     },
     {
       "name": "Dropbox",
-      "url": "https://boards.greenhouse.io/dropbox"
+      "url": "https://boards.greenhouse.io/dropbox",
+      "ats_type": "greenhouse",
+      "token": "dropbox"
     },
     {
       "name": "Oyster",
-      "url": "https://boards.greenhouse.io/oyster"
+      "url": "https://boards.greenhouse.io/oyster",
+      "ats_type": "greenhouse",
+      "token": "oyster"
     },
     {
       "name": "Remote",
-      "url": "https://boards.greenhouse.io/remote"
+      "url": "https://boards.greenhouse.io/remote",
+      "ats_type": "greenhouse",
+      "token": "remote"
     },
     {
       "name": "Qonto",
-      "url": "https://boards.greenhouse.io/qonto"
+      "url": "https://boards.greenhouse.io/qonto",
+      "ats_type": "greenhouse",
+      "token": "qonto"
     },
     {
       "name": "iFood",

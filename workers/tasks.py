@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from core.config import settings
 from core.database import SessionLocal
 from core.models import SearchQuery, JobListing, Company
 from core.deduper import calculate_canonical_hash, clean_string
@@ -7,6 +8,34 @@ from core.normalizer import parse_remote_status, normalize_location
 from spiders.wworkremotely import WeWorkRemotelySpider
 from spiders.gupy import GupySpider
 from spiders.target_company import TargetCompanySpider
+
+# Separate queue for company enrichment (Glassdoor/DDGS/Gemini calls), so a crawl
+# doesn't block on it. Falls back to running enrichment inline if Redis is unreachable.
+try:
+    import redis
+    from rq import Queue
+    _redis_conn = redis.from_url(settings.REDIS_URL, socket_connect_timeout=2)
+    _redis_conn.ping()
+    enrichment_queue = Queue("company_enrichment", connection=_redis_conn)
+except Exception:
+    enrichment_queue = None
+
+
+def enrich_company_job(company_id: str):
+    """RQ job: enrich a single company's insights (Glassdoor, salary, layoffs) via DDGS/Gemini."""
+    from core.enricher import enrich_company_insights
+    db = SessionLocal()
+    try:
+        company = db.query(Company).filter(Company.id == uuid.UUID(company_id)).first()
+        if not company:
+            print(f"Company {company_id} not found. Skipping enrichment.")
+            return
+        enrich_company_insights(company, db)
+    except Exception as e:
+        print(f"Error enriching company {company_id}: {e}")
+    finally:
+        db.close()
+
 
 def crawl_query_job(query_id: str):
     """
@@ -86,11 +115,18 @@ def crawl_query_job(query_id: str):
                     should_enrich = True
             
             if should_enrich:
-                from core.enricher import enrich_company_insights
-                try:
-                    enrich_company_insights(comp_obj, db)
-                except Exception as enrich_err:
-                    print(f"Error enriching company {comp_obj.name}: {enrich_err}")
+                if enrichment_queue:
+                    # Claim the enrichment slot now so this company isn't re-enqueued
+                    # by a concurrent/subsequent crawl before the async job finishes.
+                    comp_obj.last_enriched_at = datetime.utcnow()
+                    db.commit()
+                    enrichment_queue.enqueue(enrich_company_job, str(comp_obj.id))
+                else:
+                    from core.enricher import enrich_company_insights
+                    try:
+                        enrich_company_insights(comp_obj, db)
+                    except Exception as enrich_err:
+                        print(f"Error enriching company {comp_obj.name}: {enrich_err}")
 
             # Query existing job to verify if it is a duplicate
             existing_job = db.query(JobListing).filter(JobListing.canonical_hash == canonical_hash).first()
