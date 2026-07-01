@@ -40,7 +40,7 @@ Optimized for tech and product roles (PMs, Data PMs, Engineers), it enriches can
 *   **Gemini AI-Powered Company Insights:**
     *   Asynchronous search queries (DuckDuckGo Search) querying ratings, salaries, and layoff records.
     *   Structured metadata parsing using **Gemini 2.5 Flash** to extract exact ratings, compensation indicators, and layoff notes with zero Regex complexity.
-*   **Auto-Migrations:** Automatic SQLite database schema updating on launch to ease local development setup.
+*   **Auto-Migrations:** Automatic database schema updating on launch to ease local development setup (supports Postgres and SQLite).
 
 ---
 
@@ -50,7 +50,7 @@ Optimized for tech and product roles (PMs, Data PMs, Engineers), it enriches can
 *   **Background Worker:** [Redis Queue (RQ)](https://python-rq.org)
 *   **Database:** PostgreSQL (with `JSONB` flexibility) / SQLite (for zero-dependency local testing)
 *   **AI Engine:** [Google GenAI SDK](https://github.com/google/generative-ai-python) (Gemini 2.5 Flash)
-*   **Search / Scraping:** Scrapy + Playwright (Headless browser support) + `ddgs` (DuckDuckGo search scraper interface)
+*   **Search / Scraping:** Native `requests` (for lightweight ATS crawling) + `ddgs` (DuckDuckGo search scraper interface for company enrichment)
 
 ---
 
@@ -80,6 +80,7 @@ Copy `.env.example` to `.env` and configure your API keys:
 cp .env.example .env
 ```
 Ensure you set your `GEMINI_API_KEY` for company insights extraction.
+Additionally, POST endpoints require authentication. Set `API_KEY` in your `.env` and pass it via the `x-api-key` header in your requests.
 
 Copy `target_companies.example.json` to `target_companies.json` and edit with your own list of target companies:
 ```bash
@@ -87,27 +88,29 @@ cp target_companies.example.json target_companies.json
 ```
 
 ### 5. Running the Application:
+
+**Option A: Local Virtual Environment (SQLite & No background queues)**
 Start the FastAPI server locally:
 ```bash
 uvicorn api.main:app --reload
 ```
+
+**Option B: Production-ready Docker Compose (PostgreSQL & Redis)**
+Ensure your `.env` contains `POSTGRES_PASSWORD` (it is required by the config), then run:
+```bash
+docker-compose up --build
+```
+
 Access the interactive API docs (Swagger UI) at `http://localhost:8000/docs`.
 
 ---
 
 ## 🧪 Verification & Testing
 
-To test company insights enrichment and crawling using the SQLite database:
-
-**Run the enrichment test:**
-```bash
-python .gemini/antigravity-ide/brain/04c7146f-ca4b-4865-bbe2-d29ebfaba98f/scratch/test_v12.py
-```
-
-**Run the end-to-end crawl pipeline test:**
-```bash
-python .gemini/antigravity-ide/brain/04c7146f-ca4b-4865-bbe2-d29ebfaba98f/scratch/test_crawl.py
-```
+You can easily verify the API functionality via the built-in Swagger UI:
+1. Navigate to `http://localhost:8000/docs`.
+2. Authenticate by configuring your `API_KEY` (or the default dev key if running locally) in the `x-api-key` header.
+3. Submit a payload to `POST /search-queries` to trigger your first background crawling task.
 
 ---
 
